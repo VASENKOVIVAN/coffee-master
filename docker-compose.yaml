@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  flask:
+    # Путь до Dockerfile
+    build: ./backend
+    # Имя для создаваемого контейнера
+    container_name: backend-flask
+    # Создание переменных окружения в контейнере
+    environment:
+      # для отладки (при запуске в релиз убрать!)
+      - FLASK_ENV=development
+      ## Позволяет отслеживать процесс работы приложения в командной строке
+      - PYTHONUNBUFFERED=True
+      ##
+    # Перезапускаем сервис в случае падения
+    restart: on-failure
+    # Прокладывам путь для файлов. Все файлы, которые хранятся у вас в
+    # директории ./backend, появятся в директории контейнера /backend
+    volumes:
+      - ./backend:/backend
+    # Открываем порт в контейнер
+    # Порт, который будет смотреть наружу : порт который используется внутри контейнера
+    ports:
+      - "5000:5000"
+    links:
+      - db
+    command: python main.py
+  db:
+    image: mysql:5.7
+    container_name: db
+    ports:
+      - "3306:3306"
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: change-me
+      # MYSQL_DATABASE: devopsroles
+      # MYSQL_USER: db_user
+      # MYSQL_PASSWORD: db_user_pass
+    volumes:
+      - my-datavolume:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d/:ro
+volumes:
+  my-datavolume:
+  db:

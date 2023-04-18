@@ -1,0 +1,6 @@
+host = 'db'
+user = 'root'
+password = "change-me"
+db_name = 'devopsroles'
+
+JWT_SECRETKEY="\x94[\x17\xf5\xfb\xf1\xbb51\xf9\xd5\xef\xe7\x88\xf1\x01\x8e(\xb2\x9b-\x0co"
