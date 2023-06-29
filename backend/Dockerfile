@@ -18,5 +18,5 @@ COPY . /backend
 EXPOSE 5000
 
 # configure the container to run in an executed manner
-ENTRYPOINT ["python"]
-CMD ["main.py"]
+# ENTRYPOINT ["python"]
+# CMD ["main.py"]

@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker
 # создание экземпляра declarative_base
 Base = declarative_base()
 # Подключаемся и создаем сессию базы данных
-engine = create_engine('mysql+pymysql://root:change-me@db/devopsroles')
+engine = create_engine('mysql+pymysql://root:change-me@localhost/devopsroles')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
